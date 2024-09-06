@@ -1,0 +1,198 @@
+.help-block,
+.control-group .help-inline {
+  color: #b5b6b9;
+  font-size: 12px;
+  margin: 5px 0 10px;
+  padding: 0;
+}
+
+.alert a {
+  font-weight: bold;
+}
+.alert-success a {
+  color: #2b542c;
+}
+.alert-info a {
+  color: #245269;
+}
+.alert-warning a {
+  color: #66512c;
+}
+.alert-danger a {
+  color: #843534;
+}
+
+.well {
+  border-radius: 0px;
+}
+
+.front .block-title {
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: table;
+  white-space: nowrap;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.front .block-title > .navbar-header,
+.front .block-title > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.front .block-title:before,
+.front .block-title:after {
+  border-top: 1px solid #888c8f;
+  content: '';
+  display: table-cell;
+  position: relative;
+  top: 0.5em;
+  width: 42%;
+}
+.front .block-title:before {
+  right: 0;
+}
+.front .block-title:after {
+  left: 0;
+}
+.front-feature {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.blue-feature {
+  background-image: url('/sites/all/themes/bootstrap_component/images/Customer-Service-Blue.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  color: #FFF;
+  padding-bottom: 40px;
+  margin-top: 20px;
+}
+.blue-feature .block-title {
+  color: #FFF;
+}
+.blue-feature .block-title:before,
+.blue-feature .block-title:after {
+  border-top-color: #FFF;
+}
+.blue-feature .btn-default {
+  margin-bottom: 5px;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: transparent;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 0px;
+  border-color: #FFF;
+  color: #FFF;
+  -webkit-transition: background 0.2s ease-out;
+  -moz-transition: background 0.2s ease-out;
+  -o-transition: background 0.2s ease-out;
+  transition: background 0.2s ease-out;
+}
+.blue-feature .btn-default:hover {
+  background: #ffffff;
+  color: #1c2f55;
+}
+
+.jumbotron {
+  background-color: #f5f5f5;
+}
+.jumbotron > hr {
+  border-top-color: #dcdcdc;
+}
+
+.block-facetapi label {
+  display: none;
+}
+.block-facetapi .reset-link {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+#block-views-recommended-industries-block .views-row {
+  padding-bottom: 10px;
+}
+#block-views-recommended-industries-block .views-row img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: auto \9;
+}
+#slider-range,
+#slider-range2,
+#slider-range-imp {
+  width: 300px;
+  margin-top: 10px;
+}
+#slider-range2.ui-slider-horizontal {
+  border: 0 none;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-range,
+#slider-range2.ui-slider-horizontal .ui-slider-handle {
+  background: url("http://unbug.ru/examples/jquery/slider/slide.png") repeat scroll 0 0 transparent;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-range {
+  background-position: 0 -42px;
+  background-repeat: repeat-x;
+  height: 21px;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-handle {
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  border: 0 none;
+  height: 21px;
+  top: 0;
+  width: 21px;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-handle:focus {
+  outline: 0 none;
+}
+#slider-range2.ui-slider-horizontal .ui-slider-handle + .ui-slider-handle {
+  background-position: -21px 0;
+}
+
+.trademark {
+  background-color: #888c8f;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  color: #FFF;
+  text-align: center;
+}
+
+.contact-map {
+  border: 1px solid #888c8f;
+}
+.contact-map:hover {
+  border: 1px solid #dd1e25;
+}
+
+@media (min-width: 768px) {
+  .front .block-title {
+    width: 750px;
+  }
+  .front .block-title > .navbar-header,
+  .front .block-title > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+@media (min-width: 992px) {
+  .front .block-title {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .front .block-title {
+    width: 1170px;
+  }
+}
