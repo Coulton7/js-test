@@ -100,13 +100,13 @@ function connectAll() {
           };
    
    
-   if (document.querySelector(".field-name-build-materials-secondary-rotary").length){ //Tandem rotary position
+   if (document.querySelector(".field-name-build-materials-secondary-rotary").length < 1){ //Tandem rotary position
     connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build-materials-secondary-rotary"));
     offset +=40;
      };
      
      
-   if (document.querySelector(".field-name-build--secondary-rotary-standard").length){ //Standard rotary position, sorry these machine names are terrible. 
+   if (document.querySelector(".field-name-build--secondary-rotary-standard").length < 1){ //Standard rotary position, sorry these machine names are terrible. 
     connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build--secondary-rotary-standard"));
     offset -=20;
      };
