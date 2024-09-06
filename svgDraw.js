@@ -10,11 +10,11 @@ function absolute(x) {
 
 function drawPath(svg, path, startX, startY, endX, endY) {
     // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
-    var stroke =  parseFloat(path.attr("stroke-width"));
+    var stroke =  parseFloat(path.setAttribute("stroke-width"));
     // check if the svg is big enough to draw the path, if not, set heigh/width
-    if (svg.attr("height") <  endY)                 svg.attr("height", endY);
-    if (svg.attr("width" ) < (startX + stroke) )    svg.attr("width", (startX + stroke));
-    if (svg.attr("width" ) < (endX   + stroke) )    svg.attr("width", (endX   + stroke));
+    if (svg.setAttribute("height") <  endY)                 svg.setAttribute("height", endY);
+    if (svg.setAttribute("width" ) < (startX + stroke) )    svg.setAttribute("width", (startX + stroke));
+    if (svg.setAttribute("width" ) < (endX   + stroke) )    svg.setAttribute("width", (endX   + stroke));
     
     var deltaX = (endX - startX) * 0.15;
     var deltaY = (endY - startY) * 0.15;
@@ -34,7 +34,7 @@ function drawPath(svg, path, startX, startY, endX, endY) {
   
     // draw tha pipe-like path
     // 1. move a bit down, 2. arch,  3. move a bit to the right, 4.arch, 5. move down to the end 
-    path.attr("d",  "M"  + startX + " " + startY +
+    path.setAttribute("d",  "M"  + startX + " " + startY +
                     " V" + (startY + delta + offset) +
                     " A" + delta + " " +  delta + " 0 0 " + arc1 + " " + (startX + delta*signum(deltaX)) + " " + (startY + 2*delta+ offset) +
                     " H" + (endX - delta*signum(deltaX)) + 
