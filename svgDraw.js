@@ -49,19 +49,19 @@ function connectElements(svg, path, startElem, endElem) {
     var svgContainer= document.querySelector("#svgContainer");
 
     // if first element is lower than the second, swap!
-    if(startElem.offset().top > endElem.offset().top){
+    if(startElem.getBoundingClientRect().top > endElem.getBoundingClientRect().top){
         var temp = startElem;
         startElem = endElem;
         endElem = temp;
     }
 
     // get (top, left) corner coordinates of the svg container   
-    var svgTop  = svgContainer.offset().top;
-    var svgLeft = svgContainer.offset().left;
+    var svgTop  = svgContainer.getBoundingClientRect().top;
+    var svgLeft = svgContainer.getBoundingClientRect().left;
 
     // get (top, left) coordinates for the two elements
-    var startCoord = startElem.offset();
-    var endCoord   = endElem.offset();
+    var startCoord = startElem.getBoundingClientRect();
+    var endCoord   = endElem.getBoundingClientRect();
 
     // calculate path's start (x,y)  coords
     // we want the x coordinate to visually result in the element's mid point
@@ -84,44 +84,44 @@ function connectAll() {
     // This script manipulates the SVG lines in product_page.tpl.php to join the stock code <spans> to the drupal field outputs for each build materials bit. 
     // the machine names for the feilds are pretty awful
     
-   if (document.querySelector(".Rotary1").length){
+   if (document.querySelector(".Rotary1")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#rotary1"), document.querySelector(".Rotary1"),   document.querySelector(".field-name-build-materials-primary-rotary"));
     offset +=30;
     };
     
-   if (document.querySelector(".Stationary1").length){
+   if (document.querySelector(".Stationary1")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#stationary1"), document.querySelector(".Stationary1"),   document.querySelector(".field-name-build-materials-primary-stationa"));
     offset +=30;
      };
      
-   if (document.querySelector(".Elastomer1").length){
+   if (document.querySelector(".Elastomer1")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer1"), document.querySelector(".Elastomer1"),   document.querySelector(".field-name-build-materials-primary-elastome"));
     offset +=50;
           };
    
    
-   if (document.querySelector(".field-name-build-materials-secondary-rotary").length){ //Tandem rotary position
+   if (document.querySelector(".field-name-build-materials-secondary-rotary")){ //Tandem rotary position
     connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build-materials-secondary-rotary"));
     offset +=40;
      };
      
      
-   if (document.querySelector(".field-name-build--secondary-rotary-standard").length){ //Standard rotary position, sorry these machine names are terrible. 
+   if (document.querySelector(".field-name-build--secondary-rotary-standard")){ //Standard rotary position, sorry these machine names are terrible. 
     connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build--secondary-rotary-standard"));
     offset -=20;
      };
     
-   if (document.querySelector(".Stationary2").length){
+   if (document.querySelector(".Stationary2")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
     offset -=30;
      };
    
-   if (document.querySelector(".Elastomer2").length){
+   if (document.querySelector(".Elastomer2")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"),   document.querySelector(".field-name-build-materials-secondary-elasto"));
     offset -=30;
      };
      
-   if (document.querySelector(".build-code").length){        
+   if (document.querySelector(".build-code")){        
     connectElements(document.querySelector("#svg1"), document.querySelector("#build1"), document.querySelector(".build-code"),   document.querySelector(".field-name-build-materials-build-code"));
      };
 }
