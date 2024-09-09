@@ -10,11 +10,11 @@ function absolute(x) {
 
 function drawPath(svg, path, startX, startY, endX, endY) {
     // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
-    var stroke =  parseFloat(path.setAttribute("stroke-width"));
+    var stroke =  parseFloat(path.getAttribute("stroke-width"));
     // check if the svg is big enough to draw the path, if not, set heigh/width
-    if (svg.setAttribute("height") <  endY)                 svg.setAttribute("height", endY);
-    if (svg.setAttribute("width" ) < (startX + stroke) )    svg.setAttribute("width", (startX + stroke));
-    if (svg.setAttribute("width" ) < (endX   + stroke) )    svg.setAttribute("width", (endX   + stroke));
+    if (svg.getAttribute("height") <  endY)                 svg.getAttribute("height", endY);
+    if (svg.getAttribute("width" ) < (startX + stroke) )    svg.getAttribute("width", (startX + stroke));
+    if (svg.getAttribute("width" ) < (endX   + stroke) )    svg.getAttribute("width", (endX   + stroke));
     
     var deltaX = (endX - startX) * 0.15;
     var deltaY = (endY - startY) * 0.15;
