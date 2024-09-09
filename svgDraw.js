@@ -56,8 +56,8 @@ function connectElements(svg, path, startElem, endElem) {
     }
 
     // get (top, left) corner coordinates of the svg container   
-    var svgTop  = svgContainer.getBoundingClientRect().top;
-    var svgLeft = svgContainer.getBoundingClientRect().left;
+    var svgTop  = svgContainer.offsetTop;
+    var svgLeft = svgContainer.offsetLeft;
 
     // get (top, left) coordinates for the two elements
     var startCoord = startElem.getBoundingClientRect();
