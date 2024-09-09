@@ -34,7 +34,7 @@ function drawPath(svg, path, startX, startY, endX, endY) {
   
     // draw tha pipe-like path
     // 1. move a bit down, 2. arch,  3. move a bit to the right, 4.arch, 5. move down to the end 
-    path.setAttribute("d",  "M"  + startX + " " + startY +
+    path.getAttribute("d",  "M"  + startX + " " + startY +
                     " V" + (startY + delta + offset) +
                     " A" + delta + " " +  delta + " 0 0 " + arc1 + " " + (startX + delta*signum(deltaX)) + " " + (startY + 2*delta+ offset) +
                     " H" + (endX - delta*signum(deltaX)) + 
