@@ -49,19 +49,19 @@ function connectElements(svg, path, startElem, endElem) {
     var svgContainer= document.querySelector("#svgContainer");
 
     // if first element is lower than the second, swap!
-    if(startElem.getBoundingClientRect().top > endElem.getBoundingClientRect().top){
+    if(startElem.offsetTop > endElem.offsetTop){
         var temp = startElem;
         startElem = endElem;
         endElem = temp;
     }
 
     // get (top, left) corner coordinates of the svg container   
-    var svgTop  = svgContainer.getBoundingClientRect().top;
-    var svgLeft = svgContainer.getBoundingClientRect().left;
+    var svgTop  = svgContainer.offsetTop;
+    var svgLeft = svgContainer.offsetLeft;
 
     // get (top, left) coordinates for the two elements
-    var startCoord = startElem.getBoundingClientRect();
-    var endCoord   = endElem.getBoundingClientRect();
+    var startCoord = startElem.offsetParent;
+    var endCoord   = endElem.offsetParent;
 
     // calculate path's start (x,y)  coords
     // we want the x coordinate to visually result in the element's mid point
