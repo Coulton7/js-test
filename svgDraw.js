@@ -7,6 +7,7 @@ function getOffset(el) {
       height: rect.height || el.offsetHeight
     };
 }
+
 //helper functions, it turned out chrome doesn't support Math.sgn() 
 function signum(x) {
     return (x < 0) ? -1 : 1;
