@@ -1,12 +1,12 @@
 function getOffset(el) {
     var rect = el.getBoundingClientRect();
     return {
-      left: rect.left + window.scrollX,
-      top: rect.top + window.scrollY,
+      left: rect.left + window.pageXOffset,
+      top: rect.top + window.pageYOffset,
       width: rect.width || el.offsetWidth,
       height: rect.height || el.offsetHeight
     };
-  }
+}
 
 function drawPath(svg, path, start, end) {
 
