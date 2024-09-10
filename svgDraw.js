@@ -1,8 +1,8 @@
 function getOffset(el) {
     var rect = el.getBoundingClientRect();
     return {
-      left: rect.left + window.pageXOffset,
-      top: rect.top + window.pageYOffset,
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
       width: rect.width || el.offsetWidth,
       height: rect.height || el.offsetHeight
     };
@@ -90,7 +90,6 @@ function connectAll() {
     
    if (document.querySelector(".Rotary1")){
     connectElements(svg, document.querySelector("#rotary1"), roatary1,   primaryRotary);
-    offset +=30;
     };
     
    if (document.querySelector(".Stationary1")){
