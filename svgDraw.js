@@ -8,116 +8,118 @@ function absolute(x) {
 
   var offset= 0;
 
-function drawPath(svg, path, startX, startY, endX, endY) {
-    // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
-    var stroke =  parseFloat(path.getAttribute("stroke-width"));
-    // check if the svg is big enough to draw the path, if not, set heigh/width
-    if (svg.getAttribute("height") <  endY)                 svg.setAttribute("height", endY);
-    if (svg.getAttribute("width" ) < (startX + stroke) )    svg.setAttribute("width", (startX + stroke));
-    if (svg.getAttribute("width" ) < (endX   + stroke) )    svg.setAttribute("width", (endX   + stroke));
-    
-    var deltaX = (endX - startX) * 0.15;
-    var deltaY = (endY - startY) * 0.15;
+  function drawPath(svg, path, start, end) {
+  
+    // get the path's stroke width (if one wanted to be  really precise, one could use half the stroke size)
+    var style = getComputedStyle(path)
+    var stroke = parseFloat(style.strokeWidth);
+    var arrowHeadLength = stroke * 3;
+  
+    var deltaX = (end.x - start.x) * 0.15;
+    var deltaY = (end.y - start.y) * 0.15;
     // for further calculations which ever is the shortest distance
-    var delta  =  deltaY < absolute(deltaX) ? deltaY : absolute(deltaX);
-
+    var delta = Math.min(Math.abs(deltaX), Math.abs(deltaY));
+    var xSign = Math.sign(deltaX);
+    var ySign = Math.sign(deltaY);
+  
     // set sweep-flag (counter/clock-wise)
-    // if start element is closer to the left edge,
-    // draw the first arc counter-clockwise, and the second one clock-wise
-    var arc1 = 0; var arc2 = 1;
-    if (startX > endX) {
-        arc1 = 1;
-        arc2 = 0;
-        
-    }
+    // If xSign and ySign are opposite, then the first turn is clockwise
+    var arc1 = (xSign !== ySign) ? 1 : 0;
+    var arc2 = 1 - arc1;
   
     // draw tha pipe-like path
-    // 1. move a bit down, 2. arch,  3. move a bit to the right, 4.arch, 5. move down to the end 
-    path.setAttribute("d",  "M"  + startX + " " + startY +
-                    " V" + (startY + delta + offset) +
-                    " A" + delta + " " +  delta + " 0 0 " + arc1 + " " + (startX + delta*signum(deltaX)) + " " + (startY + 2*delta+ offset) +
-                    " H" + (endX - delta*signum(deltaX)) + 
-                    " A" + delta + " " +  delta + " 0 0 " + arc2 + " " + endX + " " + (startY + 3*delta + offset) +
-                    " V" + endY );                 
-}
+    // 1. move a bit vertically, 2. arc,  3. move a bit to the horizontally, 4.arc, 5. move vertically to the end 
+    path.setAttribute("d", ["M", start.x, start.y,
+                            "V", start.y + delta * ySign,
+                            "A", delta, delta, 0, 0, arc1, start.x + delta * xSign, start.y + 2 * delta * ySign,
+                            "H", end.x - delta * xSign,
+                            "A", delta, delta, 0, 0, arc2, end.x, start.y + 3 * delta * ySign,
+                            "V", end.y - arrowHeadLength * ySign].join(" "));
+  }
 
 function connectElements(svg, path, startElem, endElem) {
     var svgContainer = document.querySelector("#svgContainer");
 
+    var startRect = getOffset(startElem),
+        endRect = getOffset(endElem),
+        svgTop = Math.min(startElemBottom, endRect.top + endRect.height),
+        svgBottom = Math.max(startRect.top, endRect.top),
+        svgLeft = Math.min(pathStartX, pathEndX),
+        svgHeight = svgBottom - svgTop;
+  
+    // Position the SVG
+    svg.style.left = svgLeft + 'px';
+    svg.style.top = svgTop + 'px';
+    svg.style.width = Math.abs(pathEndX - pathStartX) + 'px';
+    svg.style.height = svgHeight + 'px';
+  
+    // Call function for drawing the path
+    var pathStart = {x: pathStartX - svgLeft, y: (svgTop === startElemBottom) ? 0 : svgHeight};
+    var pathEnd   = {x: pathEndX - svgLeft,   y: (svgTop === startElemBottom) ? svgHeight : 0};
 
-    // if first element is lower than the second, swap!
-    if(startElem.offsetTop > endElem.offsetTop){
-        var temp = startElem;
-        startElem = endElem;
-        endElem = temp;
-    }
-
-    // get (top, left) corner coordinates of the svg container   
-    var svgTop  = svgContainer.offsetTop;
-    var svgLeft = svgContainer.offsetLeft;
-
-    // get (top, left) coordinates for the two elements
-    var startCoord = startElem.offsetParent;
-    var endCoord   = endElem.offsetParent;
-
-    // calculate path's start (x,y)  coords
-    // we want the x coordinate to visually result in the element's mid point
-    var startX = startCoord.left + 0.5*startElem.offsetWidth - svgLeft;    // x = left offset + 0.5*width - svg's left offset
-    var startY = startCoord.top  + startElem.offsetHeight - svgTop;        // y = top offset + height - svg's top offset
-
-        // calculate path's end (x,y) coords
-    var endX = endCoord.left + 0.5*endElem.offsetWidth - svgLeft;
-    var endY = endCoord.top  - svgTop;
-
-    // call function for drawing the path
-    drawPath(svg, path, startX, startY, endX, endY);
-
+    drawPath(svg, path, pathStart, pathEnd);
 }
 
 function connectAll() {
     // connect all the paths you want!
     // This script manipulates the SVG lines in product_page.tpl.php to join the stock code <spans> to the drupal field outputs for each build materials bit. 
     // the machine names for the feilds are pretty awful
+
+    var svg = document.getElementById('svg1');
+    var roatary1 = document.querySelector('.Rotary1');
+    var stationary1 = document.querySelector('.Stationary1');
+    var elastomer1 = document.querySelector('.Elastomer1');
+    var rotary2 = document.querySelector('.field-name-build-materials-secondary-rotary') || document.querySelector(".field-name-build--secondary-rotary-standard");
+    var stationary2 = document.querySelector('.Stationary2');
+    var elastomer2 = document.querySelector('.Elastomer2');
+    var build1 = document.getElemequerySelectorntById('.build-code');
+    var primaryRotary = document.querySelector(".field-name-build-materials-primary-rotary");
+    var primaryStatioary = document.querySelector(".field-name-build-materials-primary-stationa");
+    var primaryElastomer = document.querySelector(".field-name-build-materials-primary-elastome");
+    var secondaryRotary = document.querySelector(".field-name-build-materials-secondary-rotary") || document.querySelector(".field-name-build--secondary-rotary-standard");
+    var secondaryStationary = document.querySelector(".field-name-build-materials-secondary-statio");
+    var secondaryElastomer = document.querySelector(".field-name-build-materials-secondary-elasto");
+    var buildCode = document.querySelector(".field-name-build-materials-build-code");
     
    if (document.querySelector(".Rotary1")){
-    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary1"), document.querySelector(".Rotary1"),   document.querySelector(".field-name-build-materials-primary-rotary"));
+    connectElements(svg, document.querySelector("#rotary1"), roatary1,   primaryRotary);
     offset +=30;
     };
     
    if (document.querySelector(".Stationary1")){
-    connectElements(document.querySelector("#svg1"), document.querySelector("#stationary1"), document.querySelector(".Stationary1"),   document.querySelector(".field-name-build-materials-primary-stationa"));
+    connectElements(svg, document.querySelector("#stationary1"), stationary1,   primaryStatioary);
     offset +=30;
      };
      
    if (document.querySelector(".Elastomer1")){
-    connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer1"), document.querySelector(".Elastomer1"),   document.querySelector(".field-name-build-materials-primary-elastome"));
+    connectElements(svg, document.querySelector("#elastomer1"), elastomer1,   primaryElastomer);
     offset +=50;
           };
    
    
    if (document.querySelector(".field-name-build-materials-secondary-rotary")){ //Tandem rotary position
-    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build-materials-secondary-rotary"));
+    connectElements(svg, document.querySelector("#rotary2"), rotary2,   secondaryRotary);
     offset +=40;
      };
      
      
    if (document.querySelector(".field-name-build--secondary-rotary-standard")){ //Standard rotary position, sorry these machine names are terrible. 
-    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build--secondary-rotary-standard"));
+    connectElements(svg, document.querySelector("#rotary2"), rotary2,   secondaryRotary);
     offset -=20;
      };
     
    if (document.querySelector(".Stationary2")){
-    connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
+    connectElements(svg, document.querySelector("#stationary2"), stationary2,   secondaryStationary);
     offset -=30;
      };
    
    if (document.querySelector(".Elastomer2")){
-    connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"),   document.querySelector(".field-name-build-materials-secondary-elasto"));
+    connectElements(svg, document.querySelector("#elastomer2"), elastomer2,   secondaryElastomer);
     offset -=30;
      };
      
    if (document.querySelector(".build-code")){        
-    connectElements(document.querySelector("#svg1"), document.querySelector("#build1"), document.querySelector(".build-code"),   document.querySelector(".field-name-build-materials-build-code"));
+    connectElements(svg, document.querySelector("#build1"), build1,   buildCode);
      };
 }
 
