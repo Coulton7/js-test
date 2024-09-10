@@ -8,6 +8,22 @@ function getOffset(el) {
     };
 }
 
+var svg = document.getElementById('svg1');
+var roatary1 = document.querySelector('.Rotary1');
+var stationary1 = document.querySelector('.Stationary1');
+var elastomer1 = document.querySelector('.Elastomer1');
+var rotary2 = document.querySelector('.field-name-build-materials-secondary-rotary') || document.querySelector(".field-name-build--secondary-rotary-standard");
+var stationary2 = document.querySelector('.Stationary2');
+var elastomer2 = document.querySelector('.Elastomer2');
+var build1 = document.querySelector('.build-code');
+var primaryRotary = document.querySelector(".field-name-build-materials-primary-rotary");
+var primaryStatioary = document.querySelector(".field-name-build-materials-primary-stationa");
+var primaryElastomer = document.querySelector(".field-name-build-materials-primary-elastome");
+var secondaryRotary = document.querySelector(".field-name-build-materials-secondary-rotary") || document.querySelector(".field-name-build--secondary-rotary-standard");
+var secondaryStationary = document.querySelector(".field-name-build-materials-secondary-statio");
+var secondaryElastomer = document.querySelector(".field-name-build-materials-secondary-elasto");
+var buildCode = document.querySelector(".field-name-build-materials-build-code");
+
 function drawPath(svg, path, start, end) {
 
     // get the path's stroke width (if one wanted to be  really precise, one could use half the stroke size)
@@ -71,22 +87,6 @@ function connectAll() {
     // connect all the paths you want!
     // This script manipulates the SVG lines in product_page.tpl.php to join the stock code <spans> to the drupal field outputs for each build materials bit. 
     // the machine names for the feilds are pretty awful
-
-    var svg = document.getElementById('svg1');
-    var roatary1 = document.querySelector('.Rotary1');
-    var stationary1 = document.querySelector('.Stationary1');
-    var elastomer1 = document.querySelector('.Elastomer1');
-    var rotary2 = document.querySelector('.field-name-build-materials-secondary-rotary') || document.querySelector(".field-name-build--secondary-rotary-standard");
-    var stationary2 = document.querySelector('.Stationary2');
-    var elastomer2 = document.querySelector('.Elastomer2');
-    var build1 = document.querySelector('.build-code');
-    var primaryRotary = document.querySelector(".field-name-build-materials-primary-rotary");
-    var primaryStatioary = document.querySelector(".field-name-build-materials-primary-stationa");
-    var primaryElastomer = document.querySelector(".field-name-build-materials-primary-elastome");
-    var secondaryRotary = document.querySelector(".field-name-build-materials-secondary-rotary") || document.querySelector(".field-name-build--secondary-rotary-standard");
-    var secondaryStationary = document.querySelector(".field-name-build-materials-secondary-statio");
-    var secondaryElastomer = document.querySelector(".field-name-build-materials-secondary-elasto");
-    var buildCode = document.querySelector(".field-name-build-materials-build-code");
     
    if (document.querySelector(".Rotary1")){
     connectElements(svg, document.querySelector("#rotary1"), roatary1,   primaryRotary);
