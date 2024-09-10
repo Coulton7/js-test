@@ -8,12 +8,12 @@ function getOffset(el) {
     };
   }
 
-  function drawPath(svg, path, start, end) {
-  
+function drawPath(svg, path, start, end) {
+
     // get the path's stroke width (if one wanted to be  really precise, one could use half the stroke size)
     var style = getComputedStyle(path)
     var stroke = parseFloat(style.strokeWidth);
-    
+    var arrowHeadLength = stroke * 3;
   
     var deltaX = (end.x - start.x) * 0.15;
     var deltaY = (end.y - start.y) * 0.15;
@@ -34,8 +34,8 @@ function getOffset(el) {
                             "A", delta, delta, 0, 0, arc1, start.x + delta * xSign, start.y + 2 * delta * ySign,
                             "H", end.x - delta * xSign,
                             "A", delta, delta, 0, 0, arc2, end.x, start.y + 3 * delta * ySign,
-                            "V", end.y * ySign].join(" "));
-  }
+                            "V", end.y - arrowHeadLength * ySign].join(" "));
+}
 
 function connectElements(svg, path, startElem, endElem) {
     var svgContainer = document.querySelector("#svgContainer");
