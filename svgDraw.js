@@ -55,9 +55,9 @@ function connectElements(svg, path, startElem, endElem) {
     var startRect = getOffset(startElem),
         endRect = getOffset(endElem);
       
-    console.log(startRect.top);
+    console.log(end.top);
 
-    if(startRect.offsetTop > endRect.offsetTop){
+    if(startRect.top > endRect.top){
         var temp = startElem;
         startRect = endRect;
         endRect = temp;
