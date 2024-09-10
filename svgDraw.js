@@ -72,7 +72,7 @@ function connectAll() {
     var rotary2 = document.querySelector('.field-name-build-materials-secondary-rotary') || document.querySelector(".field-name-build--secondary-rotary-standard");
     var stationary2 = document.querySelector('.Stationary2');
     var elastomer2 = document.querySelector('.Elastomer2');
-    var build1 = document.getElemequerySelectorntById('.build-code');
+    var build1 = document.querySelector('.build-code');
     var primaryRotary = document.querySelector(".field-name-build-materials-primary-rotary");
     var primaryStatioary = document.querySelector(".field-name-build-materials-primary-stationa");
     var primaryElastomer = document.querySelector(".field-name-build-materials-primary-elastome");
