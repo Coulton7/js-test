@@ -131,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function() {
 window.addEventListener("resize", function () {
     // reset svg each time 
     offset = 0;
-    document.querySelector("#svg1").style.height = "0";
-    document.querySelector("#svg1").style.width = "0";
+
     connectAll();
 });
