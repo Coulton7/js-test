@@ -8,13 +8,45 @@ function absolute(x) {
 
   var offset= 0;
 
+  function connectElements(svg, path, startElem, endElem) {
+    var svgContainer= document.querySelector("#svgContainer");
+
+    // if first element is lower than the second, swap!
+    if(startElem.offsetTop > endElem.offsetTop){
+        var temp = startElem;
+        startElem = endElem;
+        endElem = temp;
+    }
+
+    // get (top, left) corner coordinates of the svg container   
+    var svgTop  = svgContainer.offsetTop;
+    var svgLeft = svgContainer.offsetLeft;
+
+    // get (top, left) coordinates for the two elements
+    var startCoord = startElem.offsetParent;
+    var endCoord   = endElem.offsetParent;
+
+    // calculate path's start (x,y)  coords
+    // we want the x coordinate to visually result in the element's mid point
+    var startX = startCoord.left + 0.5*startElem.offsetWidth - svgLeft;    // x = left offset + 0.5*width - svg's left offset
+    var startY = startCoord.top  + startElem.offsetHeight - svgTop;        // y = top offset + height - svg's top offset
+
+        // calculate path's end (x,y) coords
+    var endX = endCoord.left + 0.5*endElem.offsetWidth - svgLeft;
+    var endY = endCoord.top  - svgTop;
+
+    // call function for drawing the path
+    drawPath(svg, path, startX, startY, endX, endY);
+
+}
+
 function drawPath(svg, path, startX, startY, endX, endY) {
     // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
-    var stroke =  parseFloat(path.attr("stroke-width"));
+    var stroke =  parseFloat(path.getAttribute("stroke-width"));
     // check if the svg is big enough to draw the path, if not, set heigh/width
-    if (svg.attr("height") <  endY)                 svg.attr("height", endY);
-    if (svg.attr("width" ) < (startX + stroke) )    svg.attr("width", (startX + stroke));
-    if (svg.attr("width" ) < (endX   + stroke) )    svg.attr("width", (endX   + stroke));
+    if (svg.getAttribute("height") <  endY)                 svg.setAttribute("height", endY);
+    if (svg.getAttribute("width" ) < (startX + stroke) )    svg.setAttribute("width", (startX + stroke));
+    if (svg.getAttribute("width" ) < (endX   + stroke) )    svg.setAttribute("width", (endX   + stroke));
     
     var deltaX = (endX - startX) * 0.15;
     var deltaY = (endY - startY) * 0.15;
@@ -34,109 +66,72 @@ function drawPath(svg, path, startX, startY, endX, endY) {
   
     // draw tha pipe-like path
     // 1. move a bit down, 2. arch,  3. move a bit to the right, 4.arch, 5. move down to the end 
-    path.attr("d",  "M"  + startX + " " + startY +
+    path.setAttribute("d",  "M"  + startX + " " + startY +
                     " V" + (startY + delta + offset) +
                     " A" + delta + " " +  delta + " 0 0 " + arc1 + " " + (startX + delta*signum(deltaX)) + " " + (startY + 2*delta+ offset) +
                     " H" + (endX - delta*signum(deltaX)) + 
                     " A" + delta + " " +  delta + " 0 0 " + arc2 + " " + endX + " " + (startY + 3*delta + offset) +
-                    " V" + endY );
-                    
-                     
-                  
+                    " V" + endY );                 
 }
-
-function connectElements(svg, path, startElem, endElem) {
-    var svgContainer= $("#svgContainer");
-
-    // if first element is lower than the second, swap!
-    if(startElem.offset().top > endElem.offset().top){
-        var temp = startElem;
-        startElem = endElem;
-        endElem = temp;
-    }
-
-    // get (top, left) corner coordinates of the svg container   
-    var svgTop  = svgContainer.offset().top;
-    var svgLeft = svgContainer.offset().left;
-
-    // get (top, left) coordinates for the two elements
-    var startCoord = startElem.offset();
-    var endCoord   = endElem.offset();
-
-    // calculate path's start (x,y)  coords
-    // we want the x coordinate to visually result in the element's mid point
-    var startX = startCoord.left + 0.5*startElem.outerWidth() - svgLeft;    // x = left offset + 0.5*width - svg's left offset
-    var startY = startCoord.top  + startElem.outerHeight() - svgTop;        // y = top offset + height - svg's top offset
-
-        // calculate path's end (x,y) coords
-    var endX = endCoord.left + 0.5*endElem.outerWidth() - svgLeft;
-    var endY = endCoord.top  - svgTop;
-
-    // call function for drawing the path
-    drawPath(svg, path, startX, startY, endX, endY);
-
-}
-
-
 
 function connectAll() {
     // connect all the paths you want!
     // This script manipulates the SVG lines in product_page.tpl.php to join the stock code <spans> to the drupal field outputs for each build materials bit. 
     // the machine names for the feilds are pretty awful
     
-   if ($(".Rotary1").length){
-    connectElements($("#svg1"), $("#rotary1"), $(".Rotary1"),   $(".field-name-build-materials-primary-rotary"));
+   if (document.querySelector(".Rotary1")){
+    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary1"), document.querySelector(".Rotary1"),   document.querySelector(".field-name-build-materials-primary-rotary"));
     offset +=30;
     };
     
-   if ($(".Stationary1").length){
-    connectElements($("#svg1"), $("#stationary1"), $(".Stationary1"),   $(".field-name-build-materials-primary-stationa"));
+   if (document.querySelector(".Stationary1")){
+    connectElements(document.querySelector("#svg1"), document.querySelector("#stationary1"), document.querySelector(".Stationary1"),   document.querySelector(".field-name-build-materials-primary-stationa"));
     offset +=30;
      };
      
-   if ($(".Elastomer1").length){
-    connectElements($("#svg1"), $("#elastomer1"), $(".Elastomer1"),   $(".field-name-build-materials-primary-elastome"));
+   if (document.querySelector(".Elastomer1")){
+    connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer1"), document.querySelector(".Elastomer1"),   document.querySelector(".field-name-build-materials-primary-elastome"));
     offset +=50;
           };
    
    
-   if ($(".field-name-build-materials-secondary-rotary").length){ //Tandem rotary position
-    connectElements($("#svg1"), $("#rotary2"), $(".Rotary2"),   $(".field-name-build-materials-secondary-rotary"));
+   if (document.querySelector(".field-name-build-materials-secondary-rotary")){ //Tandem rotary position
+    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build-materials-secondary-rotary"));
     offset +=40;
      };
      
      
-   if ($(".field-name-build--secondary-rotary-standard").length){ //Standard rotary position, sorry these machine names are terrible. 
-    connectElements($("#svg1"), $("#rotary2"), $(".Rotary2"),   $(".field-name-build--secondary-rotary-standard"));
+   if (document.querySelector(".field-name-build--secondary-rotary-standard")){ //Standard rotary position, sorry these machine names are terrible. 
+    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build--secondary-rotary-standard"));
     offset -=20;
      };
     
-   if ($(".Stationary2").length){
-    connectElements($("#svg1"), $("#stationary2"), $(".Stationary2"),   $(".field-name-build-materials-secondary-statio"));
+   if (document.querySelector(".Stationary2")){
+    connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
     offset -=30;
      };
    
-   if ($(".Elastomer2").length){
-    connectElements($("#svg1"), $("#elastomer2"), $(".Elastomer2"),   $(".field-name-build-materials-secondary-elasto"));
+   if (document.querySelector(".Elastomer2")){
+    connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"),   document.querySelector(".field-name-build-materials-secondary-elasto"));
     offset -=30;
      };
      
-   if ($(".build-code").length){        
-    connectElements($("#svg1"), $("#build1"), $(".build-code"),   $(".field-name-build-materials-build-code"));
+   if (document.querySelector(".build-code")){        
+    connectElements(document.querySelector("#svg1"), document.querySelector("#build1"), document.querySelector(".build-code"),   document.querySelector(".field-name-build-materials-build-code"));
      };
 }
 
-$(window).load(function() {
+document.addEventListener("DOMContentLoaded", function() {
     // reset svg each time 
-    $("#svg1").attr("height", "0");
-    $("#svg1").attr("width", "0");
+    document.querySelector("#svg1").style.height = "0";
+    document.querySelector("#svg1").style.width = "0";
     connectAll();
 });
 
-$(window).resize(function () {
+window.addEventListener("resize", function () {
     // reset svg each time 
     offset = 0;
-    $("#svg1").attr("height", "0");
-    $("#svg1").attr("width", "0");
+    document.querySelector("#svg1").style.height = "0";
+    document.querySelector("#svg1").style.width = "0";
     connectAll();
 });
