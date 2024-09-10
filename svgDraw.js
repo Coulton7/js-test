@@ -66,14 +66,14 @@ function connectElements(svg, path, startElem, endElem) {
     var svgTop  = svgContainer.offsetTop;
     var svgLeft = svgContainer.offsetLeft;
     // get (top, left) coordinates for the two elements
-    var startCoord = startElem.offsetParent;
-    var endCoord   = endElem.offsetParent;
+    var startCoord = startRect;
+    var endCoord   = endRect;
     // calculate path's start (x,y)  coords
     // we want the x coordinate to visually result in the element's mid point
-    var startX = startCoord.left + 0.5*startElem.offsetWidth - svgLeft;    // x = left offset + 0.5*width - svg's left offset
-    var startY = startCoord.top  + startElem.offsetHeight - svgTop;        // y = top offset + height - svg's top offset
+    var startX = startCoord.left + 0.5*startRect.width - svgLeft;    // x = left offset + 0.5*width - svg's left offset
+    var startY = startCoord.top  + startRect.height - svgTop;        // y = top offset + height - svg's top offset
         // calculate path's end (x,y) coords
-    var endX = endCoord.left + 0.5*endElem.offsetWidth - svgLeft;
+    var endX = endCoord.left + 0.5*endRect.width - svgLeft;
     var endY = endCoord.top  - svgTop;
     // call function for drawing the path
     drawPath(svg, path, startX, startY, endX, endY);
