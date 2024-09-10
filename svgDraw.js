@@ -42,6 +42,13 @@ function connectElements(svg, path, startElem, endElem) {
 
     var startRect = getOffset(startElem),
         endRect = getOffset(endElem),
+        pathStartX = startRect.left + startRect.width / 2,
+        pathEndX = endRect.left + endRect.width / 2,
+        startElemBottom = startRect.top + startRect.height,
+        svgTop = Math.min(startElemBottom, endRect.top + endRect.height),
+        svgBottom = Math.max(startRect.top, endRect.top),
+        svgLeft = Math.min(pathStartX, pathEndX),
+        svgHeight = svgBottom - svgTop;
         svgTop = Math.min(startElemBottom, endRect.top + endRect.height),
         svgBottom = Math.max(startRect.top, endRect.top),
         svgLeft = Math.min(pathStartX, pathEndX),
