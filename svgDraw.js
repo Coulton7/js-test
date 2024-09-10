@@ -71,10 +71,10 @@ function connectElements(svg, path, startElem, endElem, type, direction) {
         svgHeight = svgBottom - svgTop;
   
     // Position the SVG
-    svgContainer.style.left = svgLeft + 'px';
-    svgContainer.style.top = svgTop + 'px';
-    svgContainer.style.width = Math.abs(pathEndX - pathStartX) + 'px';
-    svgContainer.style.height = svgHeight + 'px';
+    svg.style.left = svgLeft + 'px';
+    svg.style.top = svgTop + 'px';
+    svg.style.width = Math.abs(pathEndX - pathStartX) + 'px';
+    svg.style.height = svgHeight + 'px';
   
     // Call function for drawing the path
     var pathStart = {x: pathStartX - svgLeft, y: (svgTop === startElemBottom) ? 0 : svgHeight};

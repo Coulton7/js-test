@@ -277,7 +277,7 @@ ul li.leaf {
   padding-bottom: 10px;
 }
 
-#svgContainer {
+#svg1 {
   z-index: -10;
   position: absolute;
   opacity: 0.5;
