@@ -131,6 +131,5 @@ document.addEventListener("DOMContentLoaded", function() {
 window.addEventListener("resize", function () {
     // reset svg each time 
     offset = 0;
-
     connectAll();
 });
