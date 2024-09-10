@@ -43,8 +43,8 @@ function drawPath(svg, path, startX, startY, endX, endY) {
 
 function connectElements(svg, path, startElem, endElem) {
     var svgContainer = document.querySelector("#svgContainer");
-    var startElem = document.querySelector("#svgContainer").firstChild;
-    var endElem = document.querySelector("#svgContainer").lastChild;
+    var startElem = document.querySelector("#svg1").firstChild;
+    var endElem = document.querySelector("#svg1").lastChild;
 
 
     // if first element is lower than the second, swap!
