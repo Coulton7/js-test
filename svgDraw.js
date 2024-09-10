@@ -41,11 +41,14 @@ function drawPath(svg, path, startX, startY, endX, endY) {
 function connectElements(svg, path, startElem, endElem) {
     var svgContainer = document.querySelector("#svgContainer");
     // if first element is lower than the second, swap!
+
+    var startRect = getOffset(startElem),
+        endRect = getOffset(endElem);
       
-    if(getOffset(startElem) > getOffset(endElem)){
+    if(startRect.offsetTop > endRect.offsetTop){
         var temp = startElem;
-        startElem = endElem;
-        endElem = temp;
+        startRect = endRect;
+        endRect = temp;
     }
     // get (top, left) corner coordinates of the svg container   
     var svgTop  = svgContainer.offsetTop;
