@@ -37,18 +37,18 @@ function drawPath(svg, path, start, end) {
                             "V", end.y - arrowHeadLength * ySign].join(" "));
 }
 
-function connectElements(svg, path, startElem, endElem) {
-    var svgContainer = document.querySelector("#svgContainer");
+function connectElements(svg, path, startElem, endElem, type, direction) {
 
+    // Define our container
+    var svgContainer = document.getElementById('svgContainer');
+    // Calculate SVG size and position
+    // SVG is sized to fit between the elements vertically, start at the left edge of the leftmost
+    // element and end at the right edge of the rightmost element
     var startRect = getOffset(startElem),
         endRect = getOffset(endElem),
         pathStartX = startRect.left + startRect.width / 2,
         pathEndX = endRect.left + endRect.width / 2,
         startElemBottom = startRect.top + startRect.height,
-        svgTop = Math.min(startElemBottom, endRect.top + endRect.height),
-        svgBottom = Math.max(startRect.top, endRect.top),
-        svgLeft = Math.min(pathStartX, pathEndX),
-        svgHeight = svgBottom - svgTop;
         svgTop = Math.min(startElemBottom, endRect.top + endRect.height),
         svgBottom = Math.max(startRect.top, endRect.top),
         svgLeft = Math.min(pathStartX, pathEndX),
@@ -63,9 +63,9 @@ function connectElements(svg, path, startElem, endElem) {
     // Call function for drawing the path
     var pathStart = {x: pathStartX - svgLeft, y: (svgTop === startElemBottom) ? 0 : svgHeight};
     var pathEnd   = {x: pathEndX - svgLeft,   y: (svgTop === startElemBottom) ? svgHeight : 0};
-
     drawPath(svg, path, pathStart, pathEnd);
-}
+  
+  }
 
 function connectAll() {
     // connect all the paths you want!
