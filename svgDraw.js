@@ -1,12 +1,12 @@
-//helper functions, it turned out chrome doesn't support Math.sgn() 
-function signum(x) {
-    return (x < 0) ? -1 : 1;
-}
-function absolute(x) {
-    return (x < 0) ? -x : x;
-}
-
-  var offset= 0;
+function getOffset(el) {
+    var rect = el.getBoundingClientRect();
+    return {
+      left: rect.left + window.pageXOffset,
+      top: rect.top + window.pageYOffset,
+      width: rect.width || el.offsetWidth,
+      height: rect.height || el.offsetHeight
+    };
+  }
 
   function drawPath(svg, path, start, end) {
   
@@ -88,35 +88,29 @@ function connectAll() {
     
    if (document.querySelector(".Stationary1")){
     connectElements(svg, document.querySelector("#stationary1"), stationary1,   primaryStatioary);
-    offset +=30;
-     };
+    };
      
    if (document.querySelector(".Elastomer1")){
     connectElements(svg, document.querySelector("#elastomer1"), elastomer1,   primaryElastomer);
-    offset +=50;
-          };
+    };
    
    
    if (document.querySelector(".field-name-build-materials-secondary-rotary")){ //Tandem rotary position
     connectElements(svg, document.querySelector("#rotary2"), rotary2,   secondaryRotary);
-    offset +=40;
-     };
+    };
      
      
    if (document.querySelector(".field-name-build--secondary-rotary-standard")){ //Standard rotary position, sorry these machine names are terrible. 
     connectElements(svg, document.querySelector("#rotary2"), rotary2,   secondaryRotary);
-    offset -=20;
-     };
+    };
     
    if (document.querySelector(".Stationary2")){
     connectElements(svg, document.querySelector("#stationary2"), stationary2,   secondaryStationary);
-    offset -=30;
-     };
+    };
    
    if (document.querySelector(".Elastomer2")){
     connectElements(svg, document.querySelector("#elastomer2"), elastomer2,   secondaryElastomer);
-    offset -=30;
-     };
+    };
      
    if (document.querySelector(".build-code")){        
     connectElements(svg, document.querySelector("#build1"), build1,   buildCode);
@@ -132,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 window.addEventListener("resize", function () {
     // reset svg each time 
-    offset = 0;
+    
     document.querySelector("#svg1").style.height = "0";
     document.querySelector("#svg1").style.width = "0";
     connectAll();
