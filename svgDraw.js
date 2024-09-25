@@ -102,12 +102,6 @@ function connectAll() {
     offset +=40;
      };
      
-     
-   if (document.querySelector(".field-name-build--secondary-rotary-standard")){ //Standard rotary position, sorry these machine names are terrible. 
-    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build--secondary-rotary-standard"));
-    offset -=20;
-     };
-    
    if (document.querySelector(".Stationary2")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
     offset -=30;
