@@ -102,19 +102,20 @@ function connectAll() {
     offset +=40;
      };
      
+    
    if (document.querySelector(".Stationary2")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
     offset -=30;
-     };
+    };
    
    if (document.querySelector(".Elastomer2")){
     connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"),   document.querySelector(".field-name-build-materials-secondary-elasto"));
     offset -=30;
-     };
+    };
      
    if (document.querySelector(".build-code")){        
     connectElements(document.querySelector("#svg1"), document.querySelector("#build1"), document.querySelector(".build-code"),   document.querySelector(".field-name-build-materials-build-code"));
-     };
+    };
 }
 document.addEventListener("DOMContentLoaded", function() {
     // reset svg each time 
