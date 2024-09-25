@@ -82,37 +82,39 @@ function connectAll() {
     // the machine names for the feilds are pretty awful
     
    if (document.querySelector(".Rotary1")){
-        connectElements(document.querySelector("#svg1"), document.querySelector("#rotary1"), document.querySelector(".Rotary1"),   document.querySelector(".field-name-build-materials-primary-rotary"));
-        offset +=30;
+    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary1"), document.querySelector(".Rotary1"),   document.querySelector(".field-name-build-materials-primary-rotary"));
+    offset +=30;
     };
     
    if (document.querySelector(".Stationary1")){
-        connectElements(document.querySelector("#svg1"), document.querySelector("#stationary1"), document.querySelector(".Stationary1"),   document.querySelector(".field-name-build-materials-primary-stationa"));
-        offset +=30;
+    connectElements(document.querySelector("#svg1"), document.querySelector("#stationary1"), document.querySelector(".Stationary1"),   document.querySelector(".field-name-build-materials-primary-stationa"));
+    offset +=30;
      };
      
    if (document.querySelector(".Elastomer1")){
-        connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer1"), document.querySelector(".Elastomer1"),   document.querySelector(".field-name-build-materials-primary-elastome"));
-        offset +=50;
-    };
+    connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer1"), document.querySelector(".Elastomer1"),   document.querySelector(".field-name-build-materials-primary-elastome"));
+    offset +=50;
+          };
+   
    
    if (document.querySelector(".field-name-build-materials-secondary-rotary")){ //Tandem rotary position
-        connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build-materials-secondary-rotary"));
-        offset +=40;
+    connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"),   document.querySelector(".field-name-build-materials-secondary-rotary"));
+    offset +=40;
      };
+
     
    if (document.querySelector(".Stationary2")){
-        connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
-        offset -=30;
+    connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"),   document.querySelector(".field-name-build-materials-secondary-statio"));
+    offset -=30;
     };
    
    if (document.querySelector(".Elastomer2")){
-        connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"),   document.querySelector(".field-name-build-materials-secondary-elasto"));
-        offset -=30;
+    connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"),   document.querySelector(".field-name-build-materials-secondary-elasto"));
+    offset -=30;
     };
      
    if (document.querySelector(".build-code")){        
-        connectElements(document.querySelector("#svg1"), document.querySelector("#build1"), document.querySelector(".build-code"),   document.querySelector(".field-name-build-materials-build-code"));
+    connectElements(document.querySelector("#svg1"), document.querySelector("#build1"), document.querySelector(".build-code"),   document.querySelector(".field-name-build-materials-build-code"));
     };
 }
 document.addEventListener("DOMContentLoaded", function() {
