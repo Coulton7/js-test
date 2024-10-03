@@ -98,7 +98,7 @@ function connectAll() {
         offset +=50;
     };
    
-   if (document.querySelector(".field-name-build-materials-secondary-rotary")){ //Tandem rotary position
+   if (document.querySelector(".Rotary2")){ //Tandem rotary position
         connectElements(document.querySelector("#svg1"), document.querySelector("#rotary2"), document.querySelector(".Rotary2"), document.querySelector(".field-name-build-materials-secondary-rotary"));
         offset +=40;
      };
