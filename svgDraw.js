@@ -105,12 +105,12 @@ function connectAll() {
     
    if (document.querySelector(".Stationary2")){
         connectElements(document.querySelector("#svg1"), document.querySelector("#stationary2"), document.querySelector(".Stationary2"), document.querySelector(".field-name-build-materials-secondary-statio"));
-        offset -=30;
+        offset +=30;
     };
    
    if (document.querySelector(".Elastomer2")){
         connectElements(document.querySelector("#svg1"), document.querySelector("#elastomer2"), document.querySelector(".Elastomer2"), document.querySelector(".field-name-build-materials-secondary-elasto"));
-        offset -=30;
+        offset +=30;
     };
      
    if (document.querySelector(".build-code")){        
